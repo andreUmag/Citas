@@ -1,9 +1,8 @@
 package app.backcitas.models;
+
+import app.backcitas.Enum.IdentityDocumentType;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -14,16 +13,24 @@ import java.util.UUID;
 @Builder
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-    private String fullName;
-    private Integer idCard;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String lastName;
+    private IdentityDocumentType identityDocumentType;
+    private String idCard;
 
     @Column(unique = true)
     private String email;
     private String password;
+
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @JoinColumn(name = "specialization_id")
+    private Specialization specialization;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
 
 }
+

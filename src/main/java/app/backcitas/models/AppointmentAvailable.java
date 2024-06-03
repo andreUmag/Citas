@@ -6,20 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
+
 
 @Entity
-@Table(name = "roles")
+@Table(name = "appointments_available")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Role {
+public class AppointmentAvailable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<User> Users;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime dateTime;
+
+    @OneToOne
+    @JoinColumn(name = "id_doctor")
+    private User doctor;
+
+    private Boolean available;
+
 }
