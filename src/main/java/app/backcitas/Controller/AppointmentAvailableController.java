@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/appointments-available")
+@CrossOrigin(value = "http://localhost:5173")
 public class AppointmentAvailableController {
 
     private final AppointmentAvailableService appointmentsAvailableService;
@@ -44,6 +45,14 @@ public class AppointmentAvailableController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/specialization")
+    public ResponseEntity<List<AppointmentAvailableDto>> findBySpecialization(@RequestParam("pecialization") String specialization) {
+            List<AppointmentAvailableDto> appointmentAvailableDto = appointmentsAvailableService.findBySpecialization(specialization);
+            return ResponseEntity.ok(appointmentAvailableDto);
+        
+    }
+    
 
     @PutMapping("/{id}")
     public ResponseEntity<AppointmentAvailableDto> updateAppointmentAvailable(@PathVariable Long id, @RequestBody AppointmentAvailableToSaveDto appointmentsAvailableToSaveDto) {

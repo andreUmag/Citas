@@ -12,5 +12,6 @@ public interface ScheduledAppointmentService {
     ScheduledAppointmentDto findScheduledAppointmentById(Long appointmentId) throws NotFoundExceptionEntity;
     void removeScheduledAppointment(Long appointmentId);
     List<ScheduledAppointmentDto> getAllScheduledAppointments();
+    List<ScheduledAppointmentDto> findByIdUser(Long idUser);
 
 }

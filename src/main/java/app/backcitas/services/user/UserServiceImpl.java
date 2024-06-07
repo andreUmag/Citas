@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).map(user -> {
             user.setName(dto.name());
             user.setLastName(dto.lastName());
-            user.setIdentityDocumentType(dto.identityDocumentType());
+            user.setDocumentType(dto.identityDocumentType());
             user.setIdCard(dto.idCard());
             user.setEmail(dto.email());
             user.setPassword(dto.password());
@@ -65,5 +65,11 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public UserDto findByIdCard(String idCard){
+        User user = userRepository.findByidCard(idCard);
+        return userMapper.toDto(user);
     }
 }

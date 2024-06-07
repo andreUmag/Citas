@@ -1,6 +1,5 @@
 package app.backcitas.models;
 
-import app.backcitas.Enum.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,17 +19,19 @@ public class ScheduledAppointments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_doctor")
     private User doctor;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_patient")
     private User patient;
 
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dateTime;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
     private Status status;
 
 }

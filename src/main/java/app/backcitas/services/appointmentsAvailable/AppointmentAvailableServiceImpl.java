@@ -62,4 +62,12 @@ public class AppointmentAvailableServiceImpl implements AppointmentAvailableServ
                 .map(appointmentsAvailableMapper::toDto)
                 .toList();
     }
+
+    @Override
+    public List<AppointmentAvailableDto> findBySpecialization(String specialization) {
+        return appointmentsAvailableRepository.findByDoctor_Specialization_Name(specialization)
+                .stream()
+                .map(appointmentsAvailableMapper::toDto)
+                .toList();
+    }
 }

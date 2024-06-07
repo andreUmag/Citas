@@ -12,5 +12,6 @@ public interface UserService {
     UserDto findUserById(Long userId) throws NotFoundExceptionEntity;
     void removeUser(Long userId);
     List<UserDto> getAllUsers();
+    UserDto findByIdCard(String idCard);
 
 }

@@ -1,13 +1,14 @@
 package app.backcitas.dto.scheduledAppointments;
 
-import app.backcitas.Enum.IdentityDocumentType;
-import app.backcitas.Enum.Status;
+import app.backcitas.dto.IdentityDocumentType.IdentityDocumentTypeDto;
 import app.backcitas.dto.role.RoleDto;
 import app.backcitas.dto.specialization.SpecializationDto;
+import app.backcitas.dto.status.StatusDto;
 import app.backcitas.dto.user.UserDto;
 import app.backcitas.models.Role;
 import app.backcitas.models.ScheduledAppointments;
 import app.backcitas.models.Specialization;
+import app.backcitas.models.Status;
 import app.backcitas.models.User;
 import java.time.LocalDateTime;
 import javax.annotation.processing.Generated;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-03T18:16:37-0500",
+    date = "2024-06-06T19:27:44-0500",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -54,7 +55,7 @@ public class ScheduledAppointmentMapperImpl implements ScheduledAppointmentMappe
         doctor = userDtoToUser( scheduledAppointmentDto.doctor() );
         patient = userDtoToUser( scheduledAppointmentDto.patient() );
         dateTime = scheduledAppointmentDto.dateTime();
-        status = scheduledAppointmentDto.status();
+        status = statusDtoToStatus( scheduledAppointmentDto.status() );
 
         ScheduledAppointmentToSaveDto scheduledAppointmentToSaveDto = new ScheduledAppointmentToSaveDto( id, doctor, patient, dateTime, status );
 
@@ -71,13 +72,13 @@ public class ScheduledAppointmentMapperImpl implements ScheduledAppointmentMappe
         UserDto doctor = null;
         UserDto patient = null;
         LocalDateTime dateTime = null;
-        Status status = null;
+        StatusDto status = null;
 
         id = scheduledAppointments.getId();
         doctor = userToUserDto( scheduledAppointments.getDoctor() );
         patient = userToUserDto( scheduledAppointments.getPatient() );
         dateTime = scheduledAppointments.getDateTime();
-        status = scheduledAppointments.getStatus();
+        status = statusToStatusDto( scheduledAppointments.getStatus() );
 
         ScheduledAppointmentDto scheduledAppointmentDto = new ScheduledAppointmentDto( id, doctor, patient, dateTime, status );
 
@@ -120,7 +121,6 @@ public class ScheduledAppointmentMapperImpl implements ScheduledAppointmentMappe
         user.id( userDto.id() );
         user.name( userDto.name() );
         user.lastName( userDto.lastName() );
-        user.identityDocumentType( userDto.identityDocumentType() );
         user.idCard( userDto.idCard() );
         user.email( userDto.email() );
         user.password( userDto.password() );
@@ -128,6 +128,19 @@ public class ScheduledAppointmentMapperImpl implements ScheduledAppointmentMappe
         user.role( roleDtoToRole( userDto.role() ) );
 
         return user.build();
+    }
+
+    protected Status statusDtoToStatus(StatusDto statusDto) {
+        if ( statusDto == null ) {
+            return null;
+        }
+
+        Status status = new Status();
+
+        status.setId( statusDto.id() );
+        status.setName( statusDto.name() );
+
+        return status;
     }
 
     protected SpecializationDto specializationToSpecializationDto(Specialization specialization) {
@@ -170,7 +183,6 @@ public class ScheduledAppointmentMapperImpl implements ScheduledAppointmentMappe
         Long id = null;
         String name = null;
         String lastName = null;
-        IdentityDocumentType identityDocumentType = null;
         String idCard = null;
         String email = null;
         String password = null;
@@ -180,15 +192,32 @@ public class ScheduledAppointmentMapperImpl implements ScheduledAppointmentMappe
         id = user.getId();
         name = user.getName();
         lastName = user.getLastName();
-        identityDocumentType = user.getIdentityDocumentType();
         idCard = user.getIdCard();
         email = user.getEmail();
         password = user.getPassword();
         specialization = specializationToSpecializationDto( user.getSpecialization() );
         role = roleToRoleDto( user.getRole() );
 
+        IdentityDocumentTypeDto identityDocumentType = null;
+
         UserDto userDto = new UserDto( id, name, lastName, identityDocumentType, idCard, email, password, specialization, role );
 
         return userDto;
+    }
+
+    protected StatusDto statusToStatusDto(Status status) {
+        if ( status == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String name = null;
+
+        id = status.getId();
+        name = status.getName();
+
+        StatusDto statusDto = new StatusDto( id, name );
+
+        return statusDto;
     }
 }

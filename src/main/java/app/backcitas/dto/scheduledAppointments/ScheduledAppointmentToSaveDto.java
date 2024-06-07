@@ -1,6 +1,6 @@
 package app.backcitas.dto.scheduledAppointments;
 
-import app.backcitas.Enum.Status;
+import app.backcitas.models.Status;
 import app.backcitas.models.User;
 
 import java.time.LocalDateTime;

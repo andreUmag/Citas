@@ -1,6 +1,6 @@
 package app.backcitas.dto.user;
 
-import app.backcitas.Enum.IdentityDocumentType;
+import app.backcitas.models.IdentityDocumentType;
 import app.backcitas.models.Role;
 import app.backcitas.models.Specialization;
 

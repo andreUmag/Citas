@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@CrossOrigin(value = "http://localhost:5173")
 public class UserController {
 
     private final UserService userService;
@@ -64,4 +65,11 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/card/{idCard}")
+    public ResponseEntity<UserDto> getUserByIdCard(@PathVariable String idCard) {
+            UserDto userDto = userService.findByIdCard(idCard);
+            return ResponseEntity.ok(userDto);
+        } 
+    
 }

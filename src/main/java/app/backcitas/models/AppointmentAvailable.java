@@ -1,10 +1,7 @@
 package app.backcitas.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +20,7 @@ public class AppointmentAvailable {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dateTime;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_doctor")
     private User doctor;
 

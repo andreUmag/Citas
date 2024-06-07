@@ -1,6 +1,6 @@
 package app.backcitas.dto.user;
 
-import app.backcitas.Enum.IdentityDocumentType;
+import app.backcitas.dto.IdentityDocumentType.IdentityDocumentTypeDto;
 import app.backcitas.dto.role.RoleDto;
 import app.backcitas.dto.specialization.SpecializationDto;
 import app.backcitas.models.Role;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-06-03T18:16:37-0500",
+    date = "2024-06-06T19:27:43-0500",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.7.jar, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -27,7 +27,6 @@ public class UserMapperImpl implements UserMapper {
 
         user.name( dto.name() );
         user.lastName( dto.lastName() );
-        user.identityDocumentType( dto.identityDocumentType() );
         user.idCard( dto.idCard() );
         user.email( dto.email() );
         user.password( dto.password() );
@@ -48,7 +47,6 @@ public class UserMapperImpl implements UserMapper {
         user.id( dto.id() );
         user.name( dto.name() );
         user.lastName( dto.lastName() );
-        user.identityDocumentType( dto.identityDocumentType() );
         user.idCard( dto.idCard() );
         user.email( dto.email() );
         user.password( dto.password() );
@@ -67,7 +65,6 @@ public class UserMapperImpl implements UserMapper {
         Long id = null;
         String name = null;
         String lastName = null;
-        IdentityDocumentType identityDocumentType = null;
         String idCard = null;
         String email = null;
         String password = null;
@@ -77,12 +74,13 @@ public class UserMapperImpl implements UserMapper {
         id = entity.getId();
         name = entity.getName();
         lastName = entity.getLastName();
-        identityDocumentType = entity.getIdentityDocumentType();
         idCard = entity.getIdCard();
         email = entity.getEmail();
         password = entity.getPassword();
         specialization = specializationToSpecializationDto( entity.getSpecialization() );
         role = roleToRoleDto( entity.getRole() );
+
+        IdentityDocumentTypeDto identityDocumentType = null;
 
         UserDto userDto = new UserDto( id, name, lastName, identityDocumentType, idCard, email, password, specialization, role );
 

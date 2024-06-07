@@ -1,8 +1,9 @@
 package app.backcitas.models;
 
-import app.backcitas.Enum.IdentityDocumentType;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -17,7 +18,11 @@ public class User {
     private Long id;
     private String name;
     private String lastName;
-    private IdentityDocumentType identityDocumentType;
+
+    @ManyToOne
+    @JoinColumn(name = "identity_document_type_id")
+    private IdentityDocumentType documentType;
+
     private String idCard;
 
     @Column(unique = true)
@@ -31,6 +36,13 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @ManyToOne
+    @JoinColumn(name = "eps_id")
+    private EPS eps;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<AppointmentAvailable> appointmentAvailables;
 
 }
 
