@@ -37,7 +37,7 @@ public class ScheduledAppointmentController {
         return ResponseEntity.ok(appointmentsAvailableList);
     }
 
-    @GetMapping("/patient/{id}")
+    @GetMapping("/patient/{idPatient}")
     public ResponseEntity<List<ScheduledAppointmentDto>> getAllUser(@PathVariable Long idPatient) {
         List<ScheduledAppointmentDto> appointmentsAvailableList = appointmentsAvailableService.findByIdUser(idPatient);
         return ResponseEntity.ok(appointmentsAvailableList);

@@ -46,12 +46,12 @@ public class AppointmentAvailableController {
         }
     }
 
-    @GetMapping("/specialization")
-    public ResponseEntity<List<AppointmentAvailableDto>> findBySpecialization(@RequestParam("pecialization") String specialization) {
-            List<AppointmentAvailableDto> appointmentAvailableDto = appointmentsAvailableService.findBySpecialization(specialization);
-            return ResponseEntity.ok(appointmentAvailableDto);
-        
+    @GetMapping("/specialization/{specialization}")
+    public ResponseEntity<List<AppointmentAvailableDto>> findBySpecialization(@PathVariable("specialization") String specialization) {
+        List<AppointmentAvailableDto> appointmentAvailableDto = appointmentsAvailableService.findBySpecialization(specialization);
+        return ResponseEntity.ok(appointmentAvailableDto);
     }
+    
     
 
     @PutMapping("/{id}")

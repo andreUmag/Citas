@@ -65,7 +65,7 @@ public class ScheduledAppointmentServiceImpl implements ScheduledAppointmentServ
 
     @Override
     public List<ScheduledAppointmentDto> findByIdUser(Long idUser) {
-        return scheduledAppointmentRepository.findScheduledAppointmentsByDoctor_Id(idUser)
+        return scheduledAppointmentRepository.findScheduledAppointmentsByPatient_Id(idUser)
                 .stream()
                 .map(scheduledAppointmentMapper::toDto)
                 .toList();
